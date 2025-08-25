@@ -216,8 +216,8 @@ export default function DashboardPage() {
           </div>
         )}
       </div>
-      <Toast message={error} type="error" positionClass="top-20 sm:top-6" />
-      <Toast message={success} type="success" positionClass="top-20 sm:top-6" />
+  <Toast message={error} type="error" />
+  <Toast message={success} type="success" />
       <h1 className="text-4xl font-extrabold mb-2 text-center text-fuchsia-700 tracking-tight drop-shadow-lg">
         Your Reminders
       </h1>
