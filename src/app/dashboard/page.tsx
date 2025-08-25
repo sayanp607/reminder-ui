@@ -25,7 +25,7 @@ export default function DashboardPage() {
   });
   const [dateValue, setDateValue] = useState<Date | null>(null);
   const [creating, setCreating] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [reminderToDelete, setReminderToDelete] = useState<number | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
@@ -165,12 +165,14 @@ export default function DashboardPage() {
   };
 
   useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem("token"));
-    const user = localStorage.getItem("user");
-    if (user) {
-      try {
-        setUserName(JSON.parse(user).name);
-      } catch {}
+    if (typeof window !== "undefined") {
+      setIsLoggedIn(!!localStorage.getItem("token"));
+      const user = localStorage.getItem("user");
+      if (user) {
+        try {
+          setUserName(JSON.parse(user).name);
+        } catch {}
+      }
     }
   }, []);
 
