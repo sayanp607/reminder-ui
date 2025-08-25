@@ -103,8 +103,12 @@ export default function DashboardPage() {
       setForm({ title: "", description: "", remind_at: "" });
       fetchReminders();
       playFulfillment(); // Only play fulfillment sound on creation
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Failed to create reminder');
+      }
     } finally {
       setCreating(false);
     }
@@ -130,8 +134,12 @@ export default function DashboardPage() {
       setSuccess("Reminder deleted successfully!");
       fetchReminders();
       playSad();
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Failed to delete reminder');
+      }
     }
   };
 
@@ -184,7 +192,7 @@ export default function DashboardPage() {
         }
       });
     }
-  }, [reminders, loading]);
+  }, [reminders, loading, fulfilledIds]);
 
   // Reset fulfilledIds when reminders change (e.g., after deletion)
   useEffect(() => {

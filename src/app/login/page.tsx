@@ -45,8 +45,12 @@ export default function LoginPage() {
       setTimeout(() => {
         router.push('/dashboard');
       }, 1500);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Login failed');
+      }
     } finally {
       setLoading(false);
     }
@@ -66,8 +70,12 @@ export default function LoginPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to send reset link');
       setForgotSuccess('Password reset link sent! Check your email.');
-    } catch (err: any) {
-      setForgotError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setForgotError(err.message);
+      } else {
+        setForgotError('Failed to send reset link');
+      }
     } finally {
       setForgotLoading(false);
     }

@@ -37,8 +37,12 @@ export default function SignupPage() {
       setTimeout(() => {
         router.push('/login');
       }, 1500);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Signup failed');
+      }
     } finally {
       setLoading(false);
     }
