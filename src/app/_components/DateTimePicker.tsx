@@ -8,8 +8,7 @@ export default function DateTimePicker({ value, onChange }: { value: Date | null
       <DatePicker
         selected={value}
         onChange={onChange}
-        showTimeSelect
-        showTimeSelectSeconds
+  showTimeSelect
         timeFormat="HH:mm:ss"
         timeIntervals={1}
         dateFormat="MMMM d, yyyy h:mm:ss aa"
